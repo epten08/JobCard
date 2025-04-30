@@ -40,5 +40,22 @@ class JobCardRepository implements JobCardRepositoryInterface {
         return JobCard::where('id', $id)->update($data);
     }
 
+    public function getAllFiltered($from = null, $to = null)
+    {
+        $query = JobCard::query();
+
+        if ($from) {
+            $query->whereDate('created_at', '>=', $from);
+        }
+
+        if ($to) {
+            $query->whereDate('created_at', '<=', $to);
+        }
+
+        return $query->get(); // Important: use ->get()
+    }
+
+
+
 
 }

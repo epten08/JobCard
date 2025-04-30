@@ -10,10 +10,10 @@ use App\Models\JobCard;
 
 class JobCardEdit extends Component
 {
-    public $jobCard;
-    public $form = [];
+    public JobCard $jobCard;
+    public array $form = [];
 
-    protected JobCardRepositoryInterface $repo;
+    protected ?JobCardRepositoryInterface $repo = null; // Make it nullable and initialize to null
 
     public function mount($id, JobCardRepositoryInterface $repo)
     {
@@ -28,13 +28,18 @@ class JobCardEdit extends Component
         $this->form = $this->jobCard->only([
             'job_title',
             'client_name',
-            'description',
+            'job_description',
+            'assigned_technician',
             'estimated_completion_date'
         ]);
     }
 
     public function update()
     {
+        if (!$this->repo) {
+            abort(500, 'Repository not initialized.');
+        }
+
         $validated = ValidationHelper::validate($this->form);
 
         $this->repo->update($this->jobCard->id, $validated);
@@ -42,13 +47,16 @@ class JobCardEdit extends Component
         return redirect()->route('dashboard')->with('success', 'Job Card updated successfully.');
     }
 
-    public function delete(JobCardRepositoryInterface $repo)
-{
-    $repo->delete($this->jobCard->id);
-    session()->flash('success', 'Job Card Deleted');
-    return redirect()->route('dashboard');
-}
+    public function delete()
+    {
+        if (!$this->repo) {
+            abort(500, 'Repository not initialized.');
+        }
 
+        $this->repo->delete($this->jobCard->id);
+
+        return redirect()->route('dashboard')->with('success', 'Job Card deleted successfully.');
+    }
 
     public function render()
     {

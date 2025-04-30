@@ -26,9 +26,15 @@
         </div>
 
         <div>
+            <label class="block font-medium mb-1">Assigned Technician</label>
+            <input type="text" wire:model.defer="form.assigned_technician" class="w-full border border-gray-300 rounded px-3 py-2" />
+            @error('form.assigned_technician') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
             <label class="block font-medium mb-1">Description</label>
-            <textarea wire:model.defer="form.description" rows="4" class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
-            @error('form.description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <textarea wire:model.defer="form.job_description" rows="4" class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+            @error('form.job_description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
@@ -38,12 +44,12 @@
         </div>
 
         <div class="flex justify-between items-center pt-4">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
+            <button type="submit" class="btn btn-success hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
                 Update
             </button>
 
             <button type="button" wire:click="delete"
-                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow"
+                class="btn btn-danger hover:bg-red-700 px-4 py-2 rounded shadow"
                 onclick="return confirm('Are you sure you want to delete this job card?')"
             >
                 Delete
