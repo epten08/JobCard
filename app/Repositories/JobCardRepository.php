@@ -27,4 +27,18 @@ class JobCardRepository implements JobCardRepositoryInterface {
     public function getByStatus($status) {
         return JobCard::where('status', $status)->get();
     }
+
+    public function findByUserAndNotApproved($id, $userId)
+    {
+        return JobCard::where('id', $id)
+            ->where('user_id', $userId)
+            ->where('status', '!=', 'approved')
+            ->first();
+    }
+    public function update($id, array $data)
+    {
+        return JobCard::where('id', $id)->update($data);
+    }
+
+
 }

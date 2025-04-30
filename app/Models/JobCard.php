@@ -17,9 +17,16 @@ class JobCard extends Model
         'estimated_completion_date',
         'status',
         'admin_comment',
+        'user_id',
     ];
 
     protected $casts = [
         'estimated_completion_date' => 'date',
     ];
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }

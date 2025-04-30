@@ -11,9 +11,9 @@ class JobCardForm extends Component {
 
     public function submit(JobCardRepositoryInterface $repo) {
         $validated = ValidationHelper::validate($this->form);
-        $repo->create(array_merge($validated, ['status' => 'pending']));
-        session()->flash('success', 'Job Card Created');
+        $repo->create(array_merge($validated, ['status' => 'pending','user_id' => auth()->user()->id]));
         $this->form = [];
+        return redirect()->route('dashboard')->with('success', 'Job Card Created');
     }
 
     public function render() {

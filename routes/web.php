@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\JobCardApproval;
 use App\Http\Livewire\JobCardForm;
 use App\Http\Livewire\JobCardReports;
+use App\Http\Livewire\JobCardDashboard;
+use App\Http\Livewire\JobCardEdit;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,7 +28,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/create-job-card', JobCardForm::class);
+    Route::get('/dashboard', JobCardDashboard::class)->name('dashboard');
+    Route::get('/create-job-card', JobCardForm::class)->name('jobcard.create');
+    Route::get('/edit-job-card/{id}', JobCardEdit::class)->name('jobcard.edit');
+    Route::delete('/delete-job-card/{id}', [\App\Http\Controllers\JobCardController::class, 'destroy'])->name('jobcard.delete');
 });
 
 require __DIR__.'/auth.php';
