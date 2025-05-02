@@ -23,6 +23,7 @@
                     <th class="p-2 text-left">Status</th>
                     <th class="p-2 text-left">Estimated Completion</th>
                     <th class="p-2 text-left">Created</th>
+                    <th class="p-2 text-left">Admin Comment</th>
                     <th class="p-2 text-left">Actions</th>
                 </tr>
             </thead>
@@ -34,6 +35,11 @@
                         <td class="p-2"><span class="badge bg-info">{{ $jobCard->status }}</span></td>
                         <td class="p-2">{{ $jobCard->estimated_completion_date }}</td>
                         <td class="p-2">{{ $jobCard->created_at->format('d M Y') }}</td>
+                        <td class="p-2">
+                            @if ($jobCard->admin_comment)
+                                <span class="text-gray-500 italic">Admin Comment: {{ $jobCard->admin_comment }}</span>
+                            @endif
+                        </td>
                         <td class="p-2">
                             @if ($jobCard->status !== 'approved')
                                 <a href="{{ route('jobcard.edit', $jobCard->id) }}"

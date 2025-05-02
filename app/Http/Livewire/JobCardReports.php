@@ -18,7 +18,7 @@ class JobCardReports extends Component
 
     public $jobCards = [];
 
-    protected JobCardRepositoryInterface $repo;
+    protected ?JobCardRepositoryInterface $repo = null;
 
     public $listeners = ['refreshComponent' => '$refresh'];
 
@@ -41,7 +41,8 @@ class JobCardReports extends Component
 
     public function loadData()
     {
-        $this->jobCards = $this->repo->getAllFiltered($this->from_date, $this->to_date);
+        $repo = app(JobCardRepositoryInterface::class);
+        $this->jobCards = $repo->getAllFiltered($this->from_date, $this->to_date);
 
         $this->total = $this->jobCards->count();
         $this->approved = $this->jobCards->where('status', 'approved')->count();

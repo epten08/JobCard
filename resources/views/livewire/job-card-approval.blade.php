@@ -1,4 +1,7 @@
 <div class="container mt-5">
+    <button wire:click="goToReports" class="btn btn-primary">
+        View Reports
+    </button>
     <h2>Pending Job Cards</h2>
 
     @if (session()->has('success'))

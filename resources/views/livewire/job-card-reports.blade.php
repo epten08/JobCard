@@ -12,7 +12,9 @@
             <input type="date" wire:model="to_date" class="form-control" >
         </div>
 
-        {{-- <button wire:click="loadData" class="btn btn-primary">Apply Filters</button> --}}
+       <div class="col-md-3 pt-4">
+        <button wire:click="loadData" class="btn btn-primary">Apply Filters</button>
+       </div>
 
     </div>
 

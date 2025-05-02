@@ -24,7 +24,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/approvals', JobCardApproval::class);
-    Route::get('/reports', JobCardReports::class);
+    Route::get('/reports', JobCardReports::class)->name('reports');
+
+
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
