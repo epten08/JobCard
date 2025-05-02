@@ -1,66 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Job Card Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel-based Job Card Management System with admin approval workflows, reports, and role-based access using Spatie Laravel Permission.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 💼 Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP >= 8.x
+- Composer
+- Node.js + npm
+- MySQL or PostgreSQL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚡ Option 1: Setup From ZIP + Provided Database
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+If you received the zipped project **with its database**:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1️⃣ Unzip the project.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2️⃣ Import the provided `.sql` database dump into your local database:
+```bash
+mysql -u your_user -p your_database < provided_dump.sql
+```
 
-## Laravel Sponsors
+3️⃣ Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+4️⃣ Update `.env` with **your local DB name, username, password**.
 
-### Premium Partners
+5️⃣ Install PHP dependencies:
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+6️⃣ Install frontend assets:
+```bash
+npm install && npm run dev
+```
 
-## Contributing
+7️⃣ Generate app key:
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+8️⃣ Serve the project:
+```bash
+php artisan serve
+```
 
-## Code of Conduct
+✅ **Ready!** You can now log in using:
+- Admin → `admin@example.com` / `password`
+- User1 → `user1@example.com` / `password`
+- User2 → `user2@example.com` / `password`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## ⚙ Option 2: Clone From Repository + Fresh Install
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you are cloning from the repository:
 
-## License
+1️⃣ Clone the repo:
+```bash
+git clone your-repo-url.git
+cd project-folder
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2️⃣ Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+
+3️⃣ Update `.env` with **your local DB name, username, password**.
+
+4️⃣ Install PHP dependencies:
+```bash
+composer install
+```
+
+5️⃣ Install frontend assets:
+```bash
+npm install && npm run dev
+```
+
+6️⃣ Generate app key:
+```bash
+php artisan key:generate
+```
+
+7️⃣ Run migrations:
+```bash
+php artisan migrate
+```
+
+8️⃣ Seed the database:
+```bash
+php artisan db:seed
+```
+
+✅ **Ready!** You can now log in using:
+- Admin → `admin@example.com` / `password`
+- User1 → `user1@example.com` / `password`
+- User2 → `user2@example.com` / `password`
+
+---
+
+## 📌 Notes
+
+- You can access reports and approvals from the navigation.
+- Role management is powered by **Spatie Laravel Permission**.
+- Make sure your local environment has the correct PHP and Node versions.
+
+---
+
+Happy coding! 🚀
